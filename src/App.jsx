@@ -8,8 +8,6 @@ import Home from "./pages/Home";
 import Dex from "./pages/Dex";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <BrowserRouter>

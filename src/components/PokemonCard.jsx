@@ -63,11 +63,10 @@ const typeColor = (type) => {
 };
 
 function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
-  const { img_url, korean_name, types, id, description } = pokemon;
   return (
     <Card>
-      <img src={img_url} alt={id} />
-      <p>{korean_name}</p>
+      <img src={pokemon.img_url} alt={""} />
+      <p>{pokemon.korean_name}</p>
       <div
         style={{
           margin: "10px 0 10px 0",
@@ -75,9 +74,9 @@ function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
           justifyContent: "center",
         }}
       >
-        {types.map((type) => {
+        {pokemon.types.map((type) => {
           return (
-            <TypeBox key={id + type} color={typeColor(type)}>
+            <TypeBox key={pokemon.id + type} color={typeColor(type)}>
               {type}
             </TypeBox>
           );
@@ -86,7 +85,13 @@ function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
       {isSelected ? (
         <Button onClick={() => {}}>삭제</Button>
       ) : (
-        <Button onClick={() => {}}>추가</Button>
+        <Button
+          onClick={() => {
+            onAdd();
+          }}
+        >
+          추가
+        </Button>
       )}
     </Card>
   );
