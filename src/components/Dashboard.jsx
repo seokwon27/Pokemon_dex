@@ -3,19 +3,38 @@ import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
 
 const DashboardContainer = styled.div`
-  background-color: #aaa;
+  background-color: #bbb;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+`;
+
+const ListContainer = styled.div`
+  background-color: #bbb;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  justify-items: center;
+  background-color: #ccc;
+  gap: 20px;
+  border-radius: 10px;
+  padding: 20px;
 `;
 
 const Dashboard = ({ selectedPokemon }) => {
   return (
     <DashboardContainer>
-      <h2>대시보드</h2>
+      <h2>나만의 포켓몬</h2>
+
       {selectedPokemon.length === 0 ? (
         <p>선택된 포켓몬이 없습니다.</p>
       ) : (
-        selectedPokemon.map((pokemon) => {
-          return <PokemonCard key={pokemon.id} pokemon={pokemon} isSelected={true} />;
-        })
+        <ListContainer>
+          {selectedPokemon.map((pokemon) => {
+            return <PokemonCard key={pokemon.id} pokemon={pokemon} isSelected={true} />;
+          })}
+        </ListContainer>
       )}
     </DashboardContainer>
   );

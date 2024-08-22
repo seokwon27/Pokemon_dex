@@ -3,10 +3,9 @@ import styled from "styled-components";
 
 const Card = styled.div`
   background-color: white;
-  margin: 10px;
-  width: 130px;
-  height: 200px;
   border-radius: 10px;
+  padding: 10px;
+  width: 88%;
 `;
 
 const Button = styled.button``;
@@ -16,8 +15,11 @@ const TypeBox = styled.div`
   color: white;
   margin: 5px;
   width: 42%;
-  height: 1.2rem;
+  height: 1.3rem;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const typeColor = (type) => {
@@ -65,7 +67,7 @@ const typeColor = (type) => {
 function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
   return (
     <Card>
-      <img src={pokemon.img_url} alt={""} />
+      <img src={pokemon.img_url} alt={pokemon.korean_name} />
       <p>{pokemon.korean_name}</p>
       <div
         style={{
@@ -77,7 +79,7 @@ function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
         {pokemon.types.map((type) => {
           return (
             <TypeBox key={pokemon.id + type} color={typeColor(type)}>
-              {type}
+              <p>{type}</p>
             </TypeBox>
           );
         })}

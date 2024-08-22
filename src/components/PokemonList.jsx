@@ -4,8 +4,13 @@ import PokemonCard from "./PokemonCard";
 
 const ListContainer = styled.div`
   background-color: #bbb;
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  justify-items: center;
+  border-radius: 10px;
+  padding: 20px;
+  gap: 20px;
+  overflow: hidden;
 `;
 
 const PokemonList = ({ pokemonList, onAddPokemon }) => {
