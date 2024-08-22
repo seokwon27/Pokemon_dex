@@ -85,7 +85,13 @@ function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
         })}
       </div>
       {isSelected ? (
-        <Button onClick={() => {}}>삭제</Button>
+        <Button
+          onClick={() => {
+            onRemove();
+          }}
+        >
+          삭제
+        </Button>
       ) : (
         <Button
           onClick={() => {

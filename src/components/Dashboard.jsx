@@ -22,7 +22,7 @@ const ListContainer = styled.div`
   padding: 20px;
 `;
 
-const Dashboard = ({ selectedPokemon }) => {
+const Dashboard = ({ selectedPokemon, onRemovePokemon }) => {
   return (
     <DashboardContainer>
       <h2>나만의 포켓몬</h2>
@@ -32,7 +32,16 @@ const Dashboard = ({ selectedPokemon }) => {
       ) : (
         <ListContainer>
           {selectedPokemon.map((pokemon) => {
-            return <PokemonCard key={pokemon.id} pokemon={pokemon} isSelected={true} />;
+            return (
+              <PokemonCard
+                key={pokemon.id}
+                pokemon={pokemon}
+                onRemove={() => {
+                  onRemovePokemon(pokemon);
+                }}
+                isSelected={true}
+              />
+            );
           })}
         </ListContainer>
       )}
