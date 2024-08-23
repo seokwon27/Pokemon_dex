@@ -2,14 +2,20 @@ import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import MOCK_DATA from "../mock";
+import TypeBox from "../components/TypeBox";
 
 const StDetail = styled.div`
-  background-color: #aaa;
+  background-color: bisque;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 500px;
+`;
+const PokemonInfo = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+  margin-top: 30px;
+  width: 100%;
 `;
 
 const PokemonDetail = () => {
@@ -23,10 +29,34 @@ const PokemonDetail = () => {
 
   return (
     <StDetail>
-      <div>
-        <img src={pokemon.img_url} alt={pokemon.korean_name} />
-        <h2>{pokemon.korean_name}</h2>
-        <p>타입: {pokemon.types.join(", ")}</p>
+      <img src={pokemon.img_url} alt={pokemon.korean_name} />
+      <PokemonInfo>
+        <p
+          style={{
+            color: "#aaa",
+            fontSize: "12px",
+            textAlign: "left",
+            marginBottom: "10px",
+          }}
+        >{`No. ${pokemon.id}`}</p>
+        <h2
+          style={{
+            textAlign: "left",
+            fontSize: "30px",
+            fontWeight: "800",
+          }}
+        >
+          {pokemon.korean_name}
+        </h2>
+        <p
+          style={{
+            margin: "30px 0",
+          }}
+        >
+          {pokemon.description}
+        </p>
+        <TypeBox pokemon={pokemon} />
+
         <button
           onClick={() => {
             navigate("/dex");
@@ -34,7 +64,7 @@ const PokemonDetail = () => {
         >
           뒤로 가기
         </button>
-      </div>
+      </PokemonInfo>
     </StDetail>
   );
 };
