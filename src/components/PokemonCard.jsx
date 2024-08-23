@@ -1,7 +1,8 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TypeBox from "./TypeBox";
+import { useContext } from "react";
+import { DexContext } from "../pages/Dex";
 
 const Card = styled.div`
   background-color: white;
@@ -9,12 +10,31 @@ const Card = styled.div`
   padding: 10px;
   width: 88%;
   cursor: pointer;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 5px #888;
+    transition: 200ms;
+  }
 `;
 
-const Button = styled.button``;
+const Button = styled.button`
+  background-color: ${(props) => props.color};
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 1.5rem;
+  width: 3rem;
+  cursor: pointer;
 
-function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
+  &:hover {
+    background-color: #888;
+  }
+`;
+
+function PokemonCard({ pokemon, isSelected }) {
   const navigate = useNavigate();
+
+  const { addPokemon, removePokemon } = useContext(DexContext);
 
   return (
     <Card>
@@ -40,22 +60,24 @@ function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
         >
           {pokemon.korean_name}
         </p>
-        <TypeBox pokemon={pokemon} />
+        <TypeBox pokemon={pokemon} isDetail={false} />
       </div>
       {/* 추가 삭제버튼 */}
       {isSelected ? (
         <Button
           onClick={() => {
-            onRemove();
+            removePokemon(pokemon);
           }}
+          color="#FF0000"
         >
           삭제
         </Button>
       ) : (
         <Button
           onClick={() => {
-            onAdd();
+            addPokemon(pokemon);
           }}
+          color="#008000"
         >
           추가
         </Button>

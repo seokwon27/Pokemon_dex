@@ -1,26 +1,44 @@
-import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import MOCK_DATA from "../mock";
 import TypeBox from "../components/TypeBox";
 
 const StDetail = styled.div`
-  background-color: bisque;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   height: 500px;
 `;
 const PokemonInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
-  width: 100%;
+`;
+
+const BtnWrapper = styled.div`
+  margin: 20px 0 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StBtn = styled.button`
+  width: 30%;
+  margin-top: auto;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 1.8rem;
+  &:hover {
+    cursor: pointer;
+    background-color: #ca0000;
+  }
 `;
 
 const PokemonDetail = () => {
   //쿼리 스트링 포켓몬id 가져오기
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const pokemonId = +searchParams.get("id");
   const pokemon = MOCK_DATA.find((el) => el.id === pokemonId);
 
@@ -28,44 +46,74 @@ const PokemonDetail = () => {
   const navigate = useNavigate();
 
   return (
-    <StDetail>
-      <img src={pokemon.img_url} alt={pokemon.korean_name} />
-      <PokemonInfo>
-        <p
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        margin: "0",
+      }}
+    >
+      <StDetail>
+        <img
           style={{
-            color: "#aaa",
-            fontSize: "12px",
-            textAlign: "left",
-            marginBottom: "10px",
+            width: "300px",
+            height: "300px",
           }}
-        >{`No. ${pokemon.id}`}</p>
-        <h2
-          style={{
-            textAlign: "left",
-            fontSize: "30px",
-            fontWeight: "800",
-          }}
-        >
-          {pokemon.korean_name}
-        </h2>
-        <p
-          style={{
-            margin: "30px 0",
-          }}
-        >
-          {pokemon.description}
-        </p>
-        <TypeBox pokemon={pokemon} />
-
-        <button
-          onClick={() => {
-            navigate("/dex");
-          }}
-        >
-          뒤로 가기
-        </button>
-      </PokemonInfo>
-    </StDetail>
+          src={pokemon.img_url}
+          alt={pokemon.korean_name}
+        />
+        <PokemonInfo>
+          <p
+            style={{
+              color: "#999",
+              fontSize: "18px",
+              textAlign: "left",
+              marginBottom: "10px",
+            }}
+          >{`No. ${pokemon.id}`}</p>
+          <h2
+            style={{
+              textAlign: "left",
+              fontSize: "30px",
+              fontWeight: "800",
+              margin: "20px",
+            }}
+          >
+            {pokemon.korean_name}
+          </h2>
+          <p
+            style={{
+              margin: "20px 20px 50px 20px",
+            }}
+          >
+            {pokemon.description}
+          </p>
+          <p
+            style={{
+              color: "#999",
+              fontSize: "18px",
+              textAlign: "left",
+              marginBottom: "30px",
+            }}
+          >
+            타입
+          </p>
+          <TypeBox pokemon={pokemon} isDetail={true} />
+          <BtnWrapper>
+            <StBtn
+              onClick={() => {
+                navigate("/dex");
+              }}
+            >
+              뒤로 가기
+            </StBtn>
+          </BtnWrapper>
+        </PokemonInfo>
+      </StDetail>
+    </div>
   );
 };
 

@@ -1,24 +1,22 @@
-import React from "react";
 import styled from "styled-components";
 
 const StBox = styled.div`
   background-color: ${(props) => props.color};
   color: white;
   margin: 5px;
-  width: 43%;
-  height: 1.3rem;
+  width: ${(props) => (props.$isDetail ? "200px" : "42%")};
+  height: ${(props) => (props.$isDetail ? "2rem" : "1.8em")};
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
+  font-size: ${(props) => (props.$isDetail ? "16px" : "14px")};
 `;
 
 const TypeArea = styled.div`
   margin: 10px 0 10px 0;
   display: flex;
   justify-content: center;
-  width: 100%;
 `;
 
 const typeColor = (type) => {
@@ -62,12 +60,12 @@ const typeColor = (type) => {
   }
 };
 
-const TypeBox = ({ pokemon }) => {
+const TypeBox = ({ pokemon, isDetail }) => {
   return (
     <TypeArea>
       {pokemon.types.map((type) => {
         return (
-          <StBox key={pokemon.id + type} color={typeColor(type)}>
+          <StBox key={pokemon.id + type} color={typeColor(type)} $isDetail={isDetail}>
             {type}
           </StBox>
         );

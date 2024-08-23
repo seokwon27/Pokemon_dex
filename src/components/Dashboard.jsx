@@ -1,6 +1,7 @@
-import React from "react";
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
+import { useContext } from "react";
+import { DexContext } from "../pages/Dex";
 
 const DashboardContainer = styled.div`
   background-color: #bbb;
@@ -22,7 +23,29 @@ const ListContainer = styled.div`
   padding: 20px;
 `;
 
-const Dashboard = ({ selectedPokemon, onRemovePokemon }) => {
+const DefaultImg = () => {
+  return (
+    <div
+      style={{
+        width: "120px",
+        height: "120px",
+        border: "2px dashed #777",
+        borderRadius: "10px",
+      }}
+    >
+      <img
+        src={
+          "https://i.namu.wiki/i/x7KrsctDuACm2dLbaM0X2Uag7BoL9sf9DLVauPztdApPBPn5yL1rMm8fSOBuREhK9lAKskl7oJ177UuValUIcg.webp"
+        }
+        style={{ position: "relative", width: "100%" }}
+      />
+    </div>
+  );
+};
+const Dashboard = () => {
+  const { selectedPokemon } = useContext(DexContext);
+
+  const displayedPokemon = Array(6).fill(null);
   return (
     <DashboardContainer>
       <h2
@@ -31,29 +54,25 @@ const Dashboard = ({ selectedPokemon, onRemovePokemon }) => {
           fontSize: "25px",
           margin: "20px 0",
           fontWeight: "bold",
+          textAlign: "center",
         }}
       >
         나만의 포켓몬
       </h2>
 
-      {selectedPokemon.length === 0 ? (
-        <p>선택된 포켓몬이 없습니다.</p>
-      ) : (
+      {
         <ListContainer>
-          {selectedPokemon.map((pokemon) => {
-            return (
-              <PokemonCard
-                key={pokemon.id}
-                pokemon={pokemon}
-                onRemove={() => {
-                  onRemovePokemon(pokemon);
-                }}
-                isSelected={true}
-              />
-            );
-          })}
+          {displayedPokemon
+            .map((_, index) => selectedPokemon[index] || displayedPokemon[index])
+            .map((pokemon, index) => {
+              return pokemon ? (
+                <PokemonCard key={pokemon.id} pokemon={pokemon} isSelected={true} />
+              ) : (
+                <DefaultImg key={"default" + index} />
+              );
+            })}
         </ListContainer>
-      )}
+      }
     </DashboardContainer>
   );
 };

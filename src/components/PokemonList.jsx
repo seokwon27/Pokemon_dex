@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
 
@@ -13,18 +12,11 @@ const ListContainer = styled.div`
   overflow: hidden;
 `;
 
-const PokemonList = ({ pokemonList, onAddPokemon }) => {
+const PokemonList = ({ pokemonList }) => {
   return (
     <ListContainer>
       {pokemonList.map((pokemon) => (
-        <PokemonCard
-          key={pokemon.id}
-          pokemon={pokemon}
-          onAdd={() => {
-            onAddPokemon(pokemon);
-          }}
-          isSelected={false}
-        />
+        <PokemonCard key={pokemon.id} pokemon={pokemon} isSelected={false} />
       ))}
     </ListContainer>
   );
