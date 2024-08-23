@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Card = styled.div`
@@ -6,6 +7,7 @@ const Card = styled.div`
   border-radius: 10px;
   padding: 10px;
   width: 88%;
+  cursor: pointer;
 `;
 
 const Button = styled.button``;
@@ -24,8 +26,8 @@ const TypeBox = styled.div`
 
 const typeColor = (type) => {
   switch (type) {
-    case "풀":
-      return "#42bf24";
+    case "노말":
+      return "#999999";
     case "격투":
       return "#ffa202";
     case "비행":
@@ -58,32 +60,40 @@ const typeColor = (type) => {
       return "#5462d6";
     case "페어리":
       return "#ffb1ff";
-
     default:
-      return "#aaa";
+      return "black";
   }
 };
 
 function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
+  const navigate = useNavigate();
+
   return (
     <Card>
-      <img src={pokemon.img_url} alt={pokemon.korean_name} />
-      <p>{pokemon.korean_name}</p>
       <div
-        style={{
-          margin: "10px 0 10px 0",
-          display: "flex",
-          justifyContent: "center",
+        onClick={() => {
+          navigate(`/detail?id=${pokemon.id}`);
         }}
       >
-        {pokemon.types.map((type) => {
-          return (
-            <TypeBox key={pokemon.id + type} color={typeColor(type)}>
-              <p>{type}</p>
-            </TypeBox>
-          );
-        })}
+        <img src={pokemon.img_url} alt={pokemon.korean_name} />
+        <p>{pokemon.korean_name}</p>
+        <div
+          style={{
+            margin: "10px 0 10px 0",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {pokemon.types.map((type) => {
+            return (
+              <TypeBox key={pokemon.id + type} color={typeColor(type)}>
+                <p>{type}</p>
+              </TypeBox>
+            );
+          })}
+        </div>
       </div>
+      {/* 추가 삭제버튼 */}
       {isSelected ? (
         <Button
           onClick={() => {
