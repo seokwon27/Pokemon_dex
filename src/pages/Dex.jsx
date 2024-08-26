@@ -28,7 +28,7 @@ const Dex = () => {
       : setSelectedPokemon([...selectedPokemon, pokemon]) ||
         Swal.fire({
           title: "성공!",
-          text: `"${pokemon.korean_name}"가 나만의 포켓몬에 추가되었습니다.`,
+          text: `나만의 포켓몬에 "${pokemon.korean_name}" 추가`,
           imageUrl: `${pokemon.img_url}`,
           imageWidth: 250,
           imageHeight: 250,
