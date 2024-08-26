@@ -8,7 +8,7 @@ import TypeBox from "./components/TypeBox";
 import { createContext, useState } from "react";
 import Swal from "sweetalert2";
 
-export const DexContext = createContext();
+export const AppContext = createContext();
 
 function App() {
   const [selectedPokemon, setSelectedPokemon] = useState([]);
@@ -20,6 +20,7 @@ function App() {
         icon: "error",
         title: "소지 한도 초과!",
         text: "최대 6개의 포켓몬만 선택 가능합니다!",
+        confirmButtonText: "확인",
       });
       return;
     }
@@ -28,6 +29,7 @@ function App() {
           icon: "error",
           title: "이미 추가된 포켓몬입니다!",
           text: "나만의 포켓몬을 확인해주세요",
+          confirmButtonText: "확인",
         })
       : setSelectedPokemon([...selectedPokemon, pokemon]) ||
         Swal.fire({
@@ -37,13 +39,14 @@ function App() {
           imageWidth: 250,
           imageHeight: 250,
           imageAlt: `${pokemon.korean_name}`,
+          confirmButtonText: "확인",
         });
   };
 
   //삭제
   const removePokemon = (pokemon) => {
     Swal.fire({
-      title: "포켓몬을 보내시겠습니까?",
+      title: `${pokemon.korean_name}(을)를 보내시겠습니까?`,
       text: "시작 후 취소할 수 없습니다.",
       icon: "warning",
       showCancelButton: true,
@@ -55,8 +58,9 @@ function App() {
       if (result.isConfirmed) {
         Swal.fire({
           title: "포켓몬을 보냈습니다!",
-          text: " 포켓몬이 잔혹한 야생으로 돌아갔습니다...",
+          text: " 포켓몬이 야생으로 돌아갔습니다...",
           icon: "success",
+          confirmButtonText: "확인",
         });
         setSelectedPokemon(selectedPokemon.filter((el) => el.id !== pokemon.id));
       }
@@ -64,7 +68,7 @@ function App() {
   };
 
   return (
-    <DexContext.Provider
+    <AppContext.Provider
       value={{
         selectedPokemon,
         setSelectedPokemon,
@@ -80,7 +84,7 @@ function App() {
           <Route path="/typebox" element={<TypeBox />} />
         </Routes>
       </BrowserRouter>
-    </DexContext.Provider>
+    </AppContext.Provider>
   );
 }
 

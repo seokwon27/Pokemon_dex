@@ -3,7 +3,7 @@ import styled from "styled-components";
 import MOCK_DATA from "../mock";
 import TypeBox from "../components/TypeBox";
 import { useContext } from "react";
-import { DexContext } from "../App";
+import { AppContext } from "../App";
 
 const StDetail = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ const PokemonDetail = () => {
   const pokemonId = +searchParams.get("id");
   const pokemon = MOCK_DATA.find((el) => el.id === pokemonId);
 
-  const { addPokemon } = useContext(DexContext);
+  const { addPokemon } = useContext(AppContext);
 
   //nav
   const navigate = useNavigate();
@@ -116,7 +116,7 @@ const PokemonDetail = () => {
               }}
               color="#008000"
             >
-              추가하기
+              포획하기
             </StBtn>
             <StBtn
               onClick={() => {

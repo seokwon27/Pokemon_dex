@@ -2,13 +2,15 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TypeBox from "./TypeBox";
 import { useContext } from "react";
-import { DexContext } from "../App";
+import { AppContext } from "../App";
 
 const Card = styled.div`
   background-color: white;
   border-radius: 10px;
   padding: 10px;
-  width: 88%;
+  width: 147px;
+  height: 215px;
+  opacity: 0.9;
   cursor: pointer;
   &:hover {
     transform: translateY(-5px);
@@ -23,7 +25,7 @@ const Button = styled.button`
   border: none;
   border-radius: 5px;
   height: 1.5rem;
-  width: 3rem;
+  width: 4rem;
   cursor: pointer;
 
   &:hover {
@@ -36,7 +38,7 @@ const Button = styled.button`
 function PokemonCard({ pokemon, isSelected }) {
   const navigate = useNavigate();
 
-  const { addPokemon, removePokemon } = useContext(DexContext);
+  const { addPokemon, removePokemon } = useContext(AppContext);
 
   return (
     <Card>
@@ -72,7 +74,7 @@ function PokemonCard({ pokemon, isSelected }) {
           }}
           color="#FF0000"
         >
-          삭제
+          보내기
         </Button>
       ) : (
         <Button
@@ -81,7 +83,7 @@ function PokemonCard({ pokemon, isSelected }) {
           }}
           color="#008000"
         >
-          추가
+          포획
         </Button>
       )}
     </Card>
