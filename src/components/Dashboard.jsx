@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
 import { useContext } from "react";
-import { DexContext } from "../pages/Dex";
+import { DexContext } from "../App";
 
 const DashboardContainer = styled.div`
   background-color: #bbb;

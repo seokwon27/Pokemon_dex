@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
+import MOCK_DATA from "../mock";
 
 const ListContainer = styled.div`
   background-color: #bbb;
@@ -12,10 +13,10 @@ const ListContainer = styled.div`
   overflow: hidden;
 `;
 
-const PokemonList = ({ pokemonList }) => {
+const PokemonList = () => {
   return (
     <ListContainer>
-      {pokemonList.map((pokemon) => (
+      {MOCK_DATA.map((pokemon) => (
         <PokemonCard key={pokemon.id} pokemon={pokemon} isSelected={false} />
       ))}
     </ListContainer>

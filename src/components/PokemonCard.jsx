@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TypeBox from "./TypeBox";
 import { useContext } from "react";
-import { DexContext } from "../pages/Dex";
+import { DexContext } from "../App";
 
 const Card = styled.div`
   background-color: white;

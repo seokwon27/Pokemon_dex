@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StBox = styled.div`
+const StType = styled.div`
   background-color: ${(props) => props.color};
   color: white;
   margin: 5px;
@@ -65,9 +65,9 @@ const TypeBox = ({ pokemon, isDetail }) => {
     <TypeArea>
       {pokemon.types.map((type) => {
         return (
-          <StBox key={pokemon.id + type} color={typeColor(type)} $isDetail={isDetail}>
+          <StType key={pokemon.id + type} color={typeColor(type)} $isDetail={isDetail}>
             {type}
-          </StBox>
+          </StType>
         );
       })}
     </TypeArea>
