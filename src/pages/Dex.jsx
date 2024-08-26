@@ -68,9 +68,11 @@ const Dex = () => {
         setSelectedPokemon: setSelectedPokemon,
       }}
     >
-      <Dashboard />
+      <div style={{ margin: "20px" }}>
+        <Dashboard />
 
-      <PokemonList pokemonList={MOCK_DATA} />
+        <PokemonList pokemonList={MOCK_DATA} />
+      </div>
     </DexContext.Provider>
   );
 };

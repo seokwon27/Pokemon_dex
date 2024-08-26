@@ -18,21 +18,24 @@ const PokemonInfo = styled.div`
 const BtnWrapper = styled.div`
   margin: 20px 0 5px 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 `;
 
 const StBtn = styled.button`
   width: 30%;
   margin-top: auto;
-  background-color: red;
+  background-color: ${(props) => props.color};
   color: white;
   border: none;
   border-radius: 5px;
   height: 1.8rem;
   &:hover {
     cursor: pointer;
-    background-color: #ca0000;
+    border: 2px solid black;
+    font-weight: 1000;
   }
 `;
 
@@ -46,6 +49,7 @@ const PokemonDetail = () => {
   const navigate = useNavigate();
 
   return (
+    // const {addPokemon} = useContext(DexCount)
     <div
       style={{
         display: "flex",
@@ -103,12 +107,14 @@ const PokemonDetail = () => {
           </p>
           <TypeBox pokemon={pokemon} isDetail={true} />
           <BtnWrapper>
+            <StBtn color="#008000">추가하기</StBtn>
             <StBtn
               onClick={() => {
                 navigate("/dex");
               }}
+              color="red"
             >
-              뒤로 가기
+              뒤로가기
             </StBtn>
           </BtnWrapper>
         </PokemonInfo>
