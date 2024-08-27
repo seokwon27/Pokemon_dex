@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import TypeBox from "./TypeBox";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AppContext } from "../App";
+import { useDispatch } from "react-redux";
+import { addPokemon } from "../redux/pokemonSlice";
 
 const DetailBox = styled.div`
   display: flex;
@@ -90,7 +90,8 @@ const typeColor = (type) => {
 
 const PokeDex = ({ pokemon }) => {
   const navigate = useNavigate();
-  const { addPokemon } = useContext(AppContext);
+  // const { addPokemon } = useContext(AppContext);
+  const dispatch = useDispatch();
 
   return (
     <DetailBox color={typeColor(pokemon.types[0])}>
@@ -144,7 +145,7 @@ const PokeDex = ({ pokemon }) => {
         <BtnWrapper>
           <StBtn
             onClick={() => {
-              addPokemon(pokemon);
+              dispatch(addPokemon(pokemon));
             }}
             color="#008000"
           >

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TypeBox from "./TypeBox";
-import { useContext } from "react";
-import { AppContext } from "../App";
+import { useDispatch } from "react-redux";
+import { addPokemon, removePokemon } from "../redux/pokemonSlice";
 
 const Card = styled.div`
   background-color: white;
@@ -38,7 +38,8 @@ const Button = styled.button`
 function PokemonCard({ pokemon, isSelected }) {
   const navigate = useNavigate();
 
-  const { addPokemon, removePokemon } = useContext(AppContext);
+  // const { addPokemon, removePokemon } = useContext(AppContext);
+  const dispatch = useDispatch();
 
   return (
     <Card>
@@ -70,7 +71,7 @@ function PokemonCard({ pokemon, isSelected }) {
       {isSelected ? (
         <Button
           onClick={() => {
-            removePokemon(pokemon);
+            dispatch(removePokemon(pokemon));
           }}
           color="#FF0000"
         >
@@ -79,7 +80,7 @@ function PokemonCard({ pokemon, isSelected }) {
       ) : (
         <Button
           onClick={() => {
-            addPokemon(pokemon);
+            dispatch(addPokemon(pokemon));
           }}
           color="#008000"
         >
