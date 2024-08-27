@@ -12,7 +12,7 @@ const DetailBox = styled.div`
   width: 830px;
   height: 500px;
   /* background: ${(props) => props.background}; */
-  border: 1px ${(props) => props.background} solid;
+  border: 1px ${(props) => props.color} solid;
   border-radius: 30px;
 `;
 
@@ -93,7 +93,7 @@ const PokeDex = ({ pokemon }) => {
   const { addPokemon } = useContext(AppContext);
 
   return (
-    <DetailBox background={typeColor(pokemon.types[0])}>
+    <DetailBox color={typeColor(pokemon.types[0])}>
       <DetailImg>
         <img
           style={{
